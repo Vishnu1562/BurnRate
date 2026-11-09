@@ -1,0 +1,138 @@
+<div class="burnrate-app-root">
+  <!-- Executive Top Bar -->
+  <header class="executive-header">
+    <div class="header-container">
+      <!-- Left: Brand & Status -->
+      <div class="brand-group">
+        <div class="brand-emblem" aria-hidden="true">
+          <span class="emblem-glyph">⚖️</span>
+        </div>
+        <div class="brand-titles">
+          <div class="brand-row">
+            <h1 class="brand-name">Burn<span class="gold-text">Rate</span></h1>
+            <span class="brand-edition-tag">PRO</span>
+          </div>
+          <p class="brand-tagline">Executive Financial Runway & Freelance Rate Sandbox</p>
+        </div>
+      </div>
+
+      <!-- Right: Action Bar -->
+      <div class="header-actions">
+        <!-- Audio Mute Pill -->
+        <button
+          type="button"
+          class="action-pill audio-pill"
+          (click)="toggleAudio()"
+          [title]="audioMuted() ? 'Unmute Audio (Shortcut: M)' : 'Mute Audio (Shortcut: M)'"
+          [attr.aria-pressed]="!audioMuted()"
+        >
+          <span class="pill-icon">{{ audioMuted() ? '🔇' : '🔊' }}</span>
+          <span class="pill-label">{{ audioMuted() ? 'Sound Off' : 'Sound On' }}</span>
+          <kbd class="shortcut-kbd">M</kbd>
+        </button>
+
+        <!-- Share State Pill -->
+        <button
+          type="button"
+          class="action-pill share-pill"
+          (click)="copyShareUrl()"
+          [class.copied]="copiedFeedback()"
+          title="Copy shareable link with current sandbox state"
+        >
+          <span class="pill-icon">{{ copiedFeedback() ? '✓' : '🔗' }}</span>
+          <span class="pill-label">{{ copiedFeedback() ? 'Copied Link!' : 'Share State' }}</span>
+        </button>
+
+        <!-- Generate Audit Report CTA -->
+        <button
+          type="button"
+          class="action-cta-report"
+          (click)="onOpenReport()"
+          title="Open printable executive financial audit (Shortcut: R)"
+        >
+          <span class="cta-icon">📜</span>
+          <span class="cta-text">Audit Report</span>
+          <kbd class="shortcut-kbd-accent">R</kbd>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Executive Cockpit -->
+  <main class="cockpit-container">
+    <!-- Preset Archetypes Bar -->
+    <section class="section-block presets-section" aria-label="Career Archetype Presets">
+      <div class="section-header-compact">
+        <span class="section-indicator">STAGE 1</span>
+        <h2 class="section-title">Select Career Benchmark or Customize</h2>
+      </div>
+      <app-scenario-presets
+        [activePresetName]="activePresetName()"
+        (selectPreset)="onSelectPreset($event)"
+      ></app-scenario-presets>
+    </section>
+
+    <!-- Dynamic Hero Dashboard (Balancing Scale + Horizon) -->
+    <section class="section-block dashboard-section" aria-label="Runway & Freedom Dashboard">
+      <app-runway-dashboard
+        [metrics]="metrics()"
+        [savings]="scenario().savings"
+      ></app-runway-dashboard>
+    </section>
+
+    <!-- Dual-Column Interactive Controls Cockpit -->
+    <section class="section-block controls-section" aria-label="Capital, Outflow & Revenue Controls">
+      <div class="controls-grid">
+        <!-- Column 1: Outflow & War Chest -->
+        <div class="control-column">
+          <app-expense-controls
+            [savings]="scenario().savings"
+            [expenses]="scenario().expenses"
+            (savingsChange)="onSavingsChange($event)"
+            (expenseChange)="onExpenseChange($event)"
+            (sliderInteract)="onSliderInteract()"
+          ></app-expense-controls>
+        </div>
+
+        <!-- Column 2: Inflow & Freelance Rates -->
+        <div class="control-column">
+          <app-income-controls
+            [income]="scenario().income"
+            (incomeChange)="onIncomeChange($event)"
+            (sliderInteract)="onSliderInteract()"
+          ></app-income-controls>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Executive Audit Sheet Modal (Conditional) -->
+  @if (showReportModal()) {
+    <app-report-summary
+      [scenario]="scenario()"
+      [metrics]="metrics()"
+      [shareUrl]="shareUrl()"
+      (close)="onCloseReport()"
+    ></app-report-summary>
+  }
+
+  <!-- Footer & Disclaimers -->
+  <footer class="executive-footer">
+    <div class="footer-container">
+      <div class="footer-col-info">
+        <span class="footer-brand">BurnRate © 2026</span>
+        <span class="footer-desc">Standalone Angular 22 Signals Architecture • Zero Server State • URL Encoded</span>
+      </div>
+
+      <div class="footer-col-shortcuts">
+        <span class="shortcut-tip"><kbd>M</kbd> Mute Audio</span>
+        <span class="shortcut-tip"><kbd>R</kbd> Audit Modal</span>
+        <span class="shortcut-tip"><kbd>Esc</kbd> Close</span>
+      </div>
+
+      <div class="footer-col-disclaimer">
+        <span>*Self-employment tax estimate modeled at 25% effective rate for planning purposes.</span>
+      </div>
+    </div>
+  </footer>
+</div>

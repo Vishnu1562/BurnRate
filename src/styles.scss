@@ -1,0 +1,70 @@
+/* BurnRate Global Executive Theme Styles */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-obsidian: #0c0a09;
+  --bg-surface: #171412;
+  --bg-card: #1c1917;
+  --bg-card-subtle: #292524;
+  --border-subtle: #2d2825;
+  --border-focus: #78716c;
+  --border-gold: #f59e0b;
+  --text-main: #f5f5f4;
+  --text-muted: #a8a29e;
+  --text-dim: #78716c;
+  --gold-primary: #f59e0b;
+  --gold-glow: #fbbf24;
+  --emerald-primary: #10b981;
+  --emerald-glow: #34d399;
+  --rose-primary: #f43f5e;
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--bg-obsidian);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Executive Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0c0a09;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #292524;
+  border-radius: 4px;
+  border: 1px solid #44403c;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #44403c;
+}
+
+/* Print Optimization for Financial Reports */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  .no-print, header, footer, .control-panel-card, .presets-container, .scale-stage {
+    display: none !important;
+  }
+}
